@@ -18,6 +18,7 @@ class SUser(Serializer):
     default_value = ""
 
     class Meta:
+        abstract = True
         model = User
         fields = "__all__"
 
