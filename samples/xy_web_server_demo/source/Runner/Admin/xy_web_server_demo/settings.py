@@ -37,13 +37,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "xy_django_app_account",
+    "Account",
     "Demo",
     "Resource",
     "Media",
 ]
 
-AUTH_USER_MODEL = "xy_django_app_account.AdminUser"
+AUTH_USER_MODEL = "Account.AdminUser"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

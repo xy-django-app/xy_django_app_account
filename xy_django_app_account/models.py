@@ -10,7 +10,6 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
 )
-from django.contrib.contenttypes.models import ContentType
 
 
 class AdminUserManager(BaseUserManager):
@@ -50,9 +49,18 @@ def user__thumbnails(instance=None, filename=None):
 
 
 class AdminUser(AbstractBaseUser, PermissionsMixin):
-    date_of_birth = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    date_of_birth = models.DateTimeField(
+        verbose_name=_("生日"),
+        auto_now=True,
+    )
+    is_active = models.BooleanField(
+        verbose_name=_("是否启用"),
+        default=True,
+    )
+    is_admin = models.BooleanField(
+        verbose_name=_("是否是管理员"),
+        default=False,
+    )
 
     objects = AdminUserManager()
 
@@ -62,12 +70,20 @@ class AdminUser(AbstractBaseUser, PermissionsMixin):
     sex_choices = (
         ("man", _("男")),
         ("female", _("女")),
-        ("unknown", _("女")),
+        ("unknown", _("未知")),
     )
     # 必须
-    email = models.EmailField(verbose_name=_("邮箱"), max_length=255, unique=True)
+    email = models.EmailField(
+        verbose_name=_("邮箱"),
+        max_length=255,
+        unique=True,
+    )
     username = models.CharField(
-        verbose_name=_("用户名"), max_length=255, default="", blank=False, unique=True
+        verbose_name=_("用户名"),
+        max_length=255,
+        default="",
+        blank=False,
+        unique=True,
     )
     sex = models.CharField(
         verbose_name=_("性别"),
@@ -77,19 +93,35 @@ class AdminUser(AbstractBaseUser, PermissionsMixin):
         max_length=15,
     )
     thumb = models.ImageField(
-        verbose_name=_("头像"), upload_to=user__thumbnails, blank=True, null=True
+        verbose_name=_("头像"),
+        upload_to=user__thumbnails,
+        blank=True,
+        null=True,
     )
-    age = models.IntegerField(verbose_name=_("年龄"), default=0, blank=True, null=True)
+    age = models.IntegerField(
+        verbose_name=_("年龄"),
+        default=0,
+        blank=True,
+        null=True,
+    )
     expires_time = models.DateTimeField(
-        verbose_name=_("登陆过期时间"), auto_now_add=True, blank=True, null=True
+        verbose_name=_("登陆过期时间"),
+        auto_now_add=True,
+        blank=True,
+        null=True,
     )
     nickname = models.CharField(
-        verbose_name=_("昵称"), max_length=255, default="", blank=True
+        verbose_name=_("昵称"),
+        max_length=255,
+        default="",
+        blank=True,
     )
     userid = models.CharField(
         verbose_name=_("用户ID"),
         max_length=100,
-        default=str(uuid.uuid3(uuid.uuid4(), str(time.time())).hex),
+        default=str(
+            uuid.uuid3(uuid.uuid4(), str(time.time())).hex,
+        ),
         blank=True,
         unique=True,
     )
@@ -112,9 +144,9 @@ class AdminUser(AbstractBaseUser, PermissionsMixin):
         pass
 
     class Meta:
+        abstract = True
         verbose_name = _("用户")
         verbose_name_plural = _("用户")
-        app_label = "xy_django_app_account"
 
     def __str__(self):
-        return str(self.id) + "." + self.username
+        return f"{self.id}. {self.username}"

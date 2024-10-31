@@ -6,18 +6,15 @@ User = get_user_model()
 from rest_framework import viewsets
 from collections import OrderedDict
 from collections.abc import Mapping
-from rest_framework.relations import Hyperlink, PKOnlyObject  # NOQA # isort:skip
-from rest_framework.fields import (  # NOQA # isort:skip
-    CreateOnlyDefault,
-    CurrentUserDefault,
+from rest_framework.relations import PKOnlyObject
+from rest_framework.fields import (
     SkipField,
-    empty,
 )
-from xy_admin_model_serializer.Admin_ModelSerializer import *
+from xy_django_serializer.serializers import Serializer
 
 
 # Serializers define the API representation.
-class SUser(Admin_ModelSerializer):
+class SUser(Serializer):
     default_value = ""
 
     class Meta:

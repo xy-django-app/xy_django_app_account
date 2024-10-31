@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from xy_django_app_account.models import AdminUser
+from .models import AdminUser
 
 
 class UserCreationForm(forms.ModelForm):
@@ -16,6 +16,7 @@ class UserCreationForm(forms.ModelForm):
     password2 = forms.CharField(label="重复密码", widget=forms.PasswordInput)
 
     class Meta:
+        abstract = True
         model = AdminUser
         fields = ("username",)
 
@@ -65,7 +66,7 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-@admin.register(AdminUser)
+# @admin.register(AdminUser)
 class AdminUserAdmin(UserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
@@ -78,7 +79,10 @@ class AdminUserAdmin(UserAdmin):
     list_filter = ("is_admin",)
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        ("用户资料", {"fields": ("email", "sex", "thumb", "age", "userid", "nickname")}),
+        (
+            "用户资料",
+            {"fields": ("email", "sex", "thumb", "age", "userid", "nickname")},
+        ),
         (
             "权限",
             {
