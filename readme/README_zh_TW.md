@@ -31,8 +31,12 @@ pip install xy_django_app_account
 ## 使用
 
 
+##### 1. 直接引入
+
+- ###### 1. 設定全域配置
+
 在Django專案中的settings.py檔案中加入如下配置
-例如: [settings.py](../samples//xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
+例如: [settings.py](../samples/xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
 ```python
 # settings.py
 
@@ -43,15 +47,137 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "Account",
+    "xy_django_app_account",
     "Demo",
     "Resource",
     "Media",
+    "Account",
+]
+
+AUTH_USER_MODEL = "xy_django_app_account.AdminUser"
+# 启动工程后访问 http://127.0.0.1:8401/admin 验证账户系统
+```
+
+- ###### 2. 運行專案
+
+```bash
+xy_web_server -w django start
+# 启动工程后访问 http://127.0.0.1:8401/admin 验证账户管理系统
+```
+
+##### 2. 自訂
+
+- ###### 1. 建立Account模組
+
+> 操作 [範例工程](../samples/xy_web_server_demo/)
+
+```bash
+# bash
+xy_web_server -w django startapp Account
+# Account 模块创建在 source/Runner/Admin/Account 
+```
+
+- ###### 2. 設定全域配置
+
+在Django專案中的settings.py檔案中加入如下配置
+例如: [settings.py](../samples/xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
+
+```python
+# settings.py
+
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "xy_django_app_account",
+    "Demo",
+    "Resource",
+    "Media",
+    "Account",
 ]
 
 AUTH_USER_MODEL = "Account.AdminUser"
-# 啟動工程後請造訪 http://127.0.0.1:8401/admin 驗證帳戶系統
+# 启动工程后访问 http://127.0.0.1:8401/admin 验证账户系统
 ```
+
+- ###### 3. 在[Account](../samples/xy_web_server_demo/source/Runner/Admin/Account)模組的[models.py](../samples/xy_web_server_demo/source/Runner/Admin/Account/models.py)檔中加入如下程式碼
+
+```python
+# models.py
+from django.utils.translation import gettext_lazy as _
+
+# Create your models here.
+from xy_django_app_account.models import (
+    AdminUserManager as xyAdminUserManager,
+    AdminUser as xyAdminUser,
+)
+
+class AdminUserManager(xyAdminUserManager):
+    pass
+
+
+class AdminUser(xyAdminUser):
+    objects = AdminUserManager()
+
+    class Meta:
+        verbose_name = _("用户")
+        verbose_name_plural = _("用户")
+        app_label = "Account"
+
+```
+
+- ###### 4. 在[Account](../samples/xy_web_server_demo/source/Runner/Admin/Account)模組的[admin.py](../samples/xy_web_server_demo/source/Runner/Admin/Account/admin.py)檔中加入如下程式碼
+
+```python
+# admin.py
+from django.contrib import admin
+
+# Register your models here.
+from .models import AdminUser
+from xy_django_app_account.admin import UserCreationForm as xyUserCreationForm
+from xy_django_app_account.admin import UserChangeForm as xyUserChangeForm
+from xy_django_app_account.admin import AdminUserAdmin as xyAdminUserAdmin
+
+
+class UserCreationForm(xyUserCreationForm):
+
+    class Meta:
+        model = AdminUser
+        fields = ("username",)
+
+class UserChangeForm(xyUserChangeForm):
+
+    class Meta:
+        model = AdminUser
+        fields = (
+            "password",
+            "email",
+            "username",
+            "is_active",
+            "is_admin",
+            "sex",
+            "thumb",
+            "age",
+            "userid",
+        )
+
+@admin.register(AdminUser)
+class AdminUserAdmin(xyAdminUserAdmin):
+    form = UserChangeForm
+    add_form = UserCreationForm
+
+```
+
+- ###### 5. 運行專案
+
+```bash
+xy_web_server -w django start
+# 启动工程后访问 http://127.0.0.1:8401/admin 验证账户管理系统
+```
+
 
 ##### 運轉 [範例工程](../samples/xy_web_server_demo)
 

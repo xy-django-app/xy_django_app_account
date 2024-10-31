@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "Account",
+    "xy_django_app_account",
     "Demo",
     "Resource",
     "Media",
+    "Account",
 ]
 
 AUTH_USER_MODEL = "Account.AdminUser"
