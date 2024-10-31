@@ -43,13 +43,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "xy_django_app_account",
+    "Account",
     "Demo",
     "Resource",
     "Media",
 ]
 
-AUTH_USER_MODEL = "xy_django_app_account.AdminUser"
+AUTH_USER_MODEL = "Account.AdminUser"
 # 啟動工程後請造訪 http://127.0.0.1/admin 驗證帳戶系統
 ```
 
