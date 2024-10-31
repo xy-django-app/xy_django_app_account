@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = "Account.AdminUser"
-# After starting the project, visit http://127.0.0.1/admin to verify the account system
+# After starting the project, visit http://127.0.0.1:8401/admin to verify the account system
 ```
 
 ##### Run [Sample Project](../samples/xy_web_server_demo)

@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = "Account.AdminUser"
-# 啟動工程後請造訪 http://127.0.0.1/admin 驗證帳戶系統
+# 啟動工程後請造訪 http://127.0.0.1:8401/admin 驗證帳戶系統
 ```
 
 ##### 運轉 [範例工程](../samples/xy_web_server_demo)

@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = "Account.AdminUser"
-# 启动工程后访问 http://127.0.0.1/admin 验证账户系统
+# 启动工程后访问 http://127.0.0.1:8401/admin 验证账户系统
 ```
 
 ##### 运行 [样例工程](./samples/xy_web_server_demo)
