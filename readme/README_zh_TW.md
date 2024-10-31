@@ -30,18 +30,34 @@ pip install xy_django_app_account
 
 ## 使用
 
-```bash
-# bash
-xy_django_app_account -c project -n xy_django_app_account_demo
-# 创建项目 [ xy_django_app_account_demo ] 成功!!!
-# 项目路径 ==>>> /mnt/bs-media/Workspace/project/opensource/xy-web-service/xy_django_app_account/test/xy_django_app_account_demo
 
-cd xy_django_app_account_demo
-xy_django_app_account
-# >>>>>>>>>>>> xy_django_app_account - v1.0.1 <<<<<<<<<<<<<
-#
-# Hello World!!!
+在Django專案中的settings.py檔案中加入如下配置
+例如: [settings.py](../samples//xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
+```python
+# settings.py
+
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "xy_django_app_account",
+    "Demo",
+    "Resource",
+    "Media",
+]
+
+AUTH_USER_MODEL = "xy_django_app_account.AdminUser"
+# 啟動工程後請造訪 http://127.0.0.1/admin 驗證帳戶系統
 ```
+
+##### 運轉 [範例工程](../samples/xy_web_server_demo)
+
+> 範例工程具體使用方式請移步 <b style="color: blue">xy_web_server.git</b> 下列倉庫
+> - <a href="https://github.com/xy-web-service/xy_web_server.git" target="_blank">Github位址</a>  
+> - <a href="https://gitee.com/xy-web-service/xy_web_server.git" target="_blank">Gitee位址</a>
 
 ## 許可證
 xy_django_app_account 根據 <木蘭寬鬆許可證, 第2版> 獲得許可。有關詳細信息，請參閱 [LICENSE](../LICENSE) 文件。

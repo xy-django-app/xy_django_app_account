@@ -30,18 +30,34 @@ pip install xy_django_app_account
 
 ## How to use
 
-```bash
-# bash
-xy_django_app_account -c project -n xy_django_app_account_demo
-# 创建项目 [ xy_django_app_account_demo ] 成功!!!
-# 项目路径 ==>>> /mnt/bs-media/Workspace/project/opensource/xy-web-service/xy_django_app_account/test/xy_django_app_account_demo
+Add the following configuration to the settings.py file in the Django project
+For example: [settings.py](../samples//xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
 
-cd xy_django_app_account_demo
-xy_django_app_account
-# >>>>>>>>>>>> xy_django_app_account - v1.0.1 <<<<<<<<<<<<<
-#
-# Hello World!!!
+```python
+# settings.py
+
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "xy_django_app_account",
+    "Demo",
+    "Resource",
+    "Media",
+]
+
+AUTH_USER_MODEL = "xy_django_app_account.AdminUser"
+# After starting the project, visit http://127.0.0.1/admin to verify the account system
 ```
+
+##### Run [Sample Project](../samples/xy_web_server_demo)
+
+> For detailed usage of the sample project, please go to the following repository <b style="color: blue">xy_web_server.git</b> 
+> - <a href="https://github.com/xy-web-service/xy_web_server.git" target="_blank">Github</a>  
+> - <a href="https://gitee.com/xy-web-service/xy_web_server.git" target="_blank">Gitee</a>
 
 ## License
 xy_django_app_account is licensed under the <Mulan Permissive Software License，Version 2>. See the [LICENSE](../LICENSE) file for more info.
