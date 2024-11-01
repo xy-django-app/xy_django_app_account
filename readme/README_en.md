@@ -30,12 +30,11 @@ pip install xy_django_app_account
 
 ## How to use
 
-##### 1. 直接引入
+##### 1. Direct import
 
-- ###### 1. 设置全局配置
+- ###### 1. Set global configuration
 
-在Django项目中的settings.py文件中加入如下配置
-例如: [settings.py](../samples/xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
+Add the following configuration to the [settings.py](../samples/xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py) file in the Django project
 ```python
 # settings.py
 
@@ -56,7 +55,7 @@ AUTH_USER_MODEL = "xy_django_app_account.AdminUser"
 # 启动工程后访问 http://127.0.0.1:8401/admin 验证账户系统
 ```
 
-- ###### 2. 运行项目
+- ###### 2. Run project
 
 ```bash
 xy_web_server -w django makemigrations
@@ -66,11 +65,11 @@ xy_web_server -w django start
 # 启动工程后访问 http://127.0.0.1:8401/admin 验证账户管理系统
 ```
 
-##### 2. 自定义
+##### 2. Customize
 
-- ###### 1. 创建Account模块
+- ###### 1. Create Account module
 
-> 操作 [样例工程](../samples/xy_web_server_demo/)
+> Operation [Sample Project](../samples/xy_web_server_demo/)
 
 ```bash
 # bash
@@ -78,10 +77,10 @@ xy_web_server -w django startapp Account
 # Account 模块创建在 source/Runner/Admin/Account 
 ```
 
-- ###### 2. 设置全局配置
+- ###### 2. Set global configuration
 
-在Django项目中的settings.py文件中加入如下配置
-例如: [settings.py](../samples/xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
+Add the following configuration to the settings.py file in the Django project
+For example: [settings.py](../samples/xy_web_server_demo/source/Runner/Admin/xy_web_server_demo/settings.py)
 
 ```python
 # settings.py
@@ -103,7 +102,7 @@ AUTH_USER_MODEL = "Account.AdminUser"
 # 启动工程后访问 http://127.0.0.1:8401/admin 验证账户系统
 ```
 
-- ###### 3. 在[Account](../samples/xy_web_server_demo/source/Runner/Admin/Account)模块的[models.py](../samples/xy_web_server_demo/source/Runner/Admin/Account/models.py)文件中加入如下代码
+- ###### 3. Add the following code to the [models.py](../samples/xy_web_server_demo/source/Runner/Admin/Account/models.py) file of the [Account](../samples/xy_web_server_demo/source/Runner/Admin/Account) module
 
 ```python
 # models.py
@@ -130,7 +129,7 @@ class MAdminUser(xyAdminUser):
 
 ```
 
-- ###### 4. 在[Account](../samples/xy_web_server_demo/source/Runner/Admin/Account)模块的[admin.py](../samples/xy_web_server_demo/source/Runner/Admin/Account/admin.py)文件中加入如下代码
+- ###### 4. Add the following code to the [admin.py](../samples/xy_web_server_demo/source/Runner/Admin/Account/admin.py) file of the [Account](../samples/xy_web_server_demo/source/Runner/Admin/Account) module
 
 ```python
 # admin.py
@@ -173,7 +172,7 @@ class AAdminUserAdmin(AAAdminUserAdmin):
 
 ```
 
-- ###### 5. 运行项目
+- ###### 5. Run project
 
 ```bash
 xy_web_server -w django makemigrations
