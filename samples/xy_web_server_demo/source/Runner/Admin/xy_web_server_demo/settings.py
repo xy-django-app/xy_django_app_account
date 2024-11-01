@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "xy_django_app_account",
+    # "xy_django_app_account",
     "Demo",
     "Resource",
     "Media",
