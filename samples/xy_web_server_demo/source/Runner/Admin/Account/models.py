@@ -1,18 +1,18 @@
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
-from xy_django_app_account.models import (
+from xy_django_app_account.abstracts import (
     AdminUserManager as xyAdminUserManager,
-    AdminUser as xyAdminUser,
+    MAAdminUser as xyAdminUser,
 )
 
 
-class AdminUserManager(xyAdminUserManager):
+class MAdminUserManager(xyAdminUserManager):
     pass
 
 
-class AdminUser(xyAdminUser):
-    objects = AdminUserManager()
+class MAdminUser(xyAdminUser):
+    objects = MAdminUserManager()
 
     class Meta:
         verbose_name = _("用户")

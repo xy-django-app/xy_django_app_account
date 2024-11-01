@@ -1,23 +1,21 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import AdminUser
-from xy_django_app_account.admin import UserCreationForm as xyUserCreationForm
-from xy_django_app_account.admin import UserChangeForm as xyUserChangeForm
-from xy_django_app_account.admin import AdminUserAdmin as xyAdminUserAdmin
+from .models import MAdminUser
+from xy_django_app_account.aabstracts import *
 
 
-class UserCreationForm(xyUserCreationForm):
+class AUserCreationForm(AAUserCreationForm):
 
     class Meta:
-        model = AdminUser
+        model = MAdminUser
         fields = ("username",)
 
 
-class UserChangeForm(xyUserChangeForm):
+class AUserChangeForm(AAUserChangeForm):
 
     class Meta:
-        model = AdminUser
+        model = MAdminUser
         fields = (
             "password",
             "email",
@@ -31,7 +29,8 @@ class UserChangeForm(xyUserChangeForm):
         )
 
 
-@admin.register(AdminUser)
-class AdminUserAdmin(xyAdminUserAdmin):
-    form = UserChangeForm
-    add_form = UserCreationForm
+@admin.register(MAdminUser)
+class AAdminUserAdmin(AAAdminUserAdmin):
+    # The forms to add and change user instances
+    form = AAUserChangeForm
+    add_form = AAUserCreationForm

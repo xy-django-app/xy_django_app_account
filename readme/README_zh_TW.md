@@ -108,17 +108,18 @@ AUTH_USER_MODEL = "Account.AdminUser"
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
-from xy_django_app_account.models import (
+from xy_django_app_account.abstracts import (
     AdminUserManager as xyAdminUserManager,
-    AdminUser as xyAdminUser,
+    MAAdminUser as xyAdminUser,
 )
 
-class AdminUserManager(xyAdminUserManager):
+
+class MAdminUserManager(xyAdminUserManager):
     pass
 
 
-class AdminUser(xyAdminUser):
-    objects = AdminUserManager()
+class MAdminUser(xyAdminUser):
+    objects = MAdminUserManager()
 
     class Meta:
         verbose_name = _("用户")
@@ -134,22 +135,21 @@ class AdminUser(xyAdminUser):
 from django.contrib import admin
 
 # Register your models here.
-from .models import AdminUser
-from xy_django_app_account.admin import UserCreationForm as xyUserCreationForm
-from xy_django_app_account.admin import UserChangeForm as xyUserChangeForm
-from xy_django_app_account.admin import AdminUserAdmin as xyAdminUserAdmin
+from .models import MAdminUser
+from xy_django_app_account.aabstracts import *
 
 
-class UserCreationForm(xyUserCreationForm):
+class AUserCreationForm(AAUserCreationForm):
 
     class Meta:
-        model = AdminUser
+        model = MAdminUser
         fields = ("username",)
 
-class UserChangeForm(xyUserChangeForm):
+
+class AUserChangeForm(AAUserChangeForm):
 
     class Meta:
-        model = AdminUser
+        model = MAdminUser
         fields = (
             "password",
             "email",
@@ -162,10 +162,12 @@ class UserChangeForm(xyUserChangeForm):
             "userid",
         )
 
-@admin.register(AdminUser)
-class AdminUserAdmin(xyAdminUserAdmin):
-    form = UserChangeForm
-    add_form = UserCreationForm
+
+@admin.register(MAdminUser)
+class AAdminUserAdmin(AAAdminUserAdmin):
+    # The forms to add and change user instances
+    form = AAUserChangeForm
+    add_form = AAUserCreationForm
 
 ```
 
